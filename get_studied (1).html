@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Studied</title>
+<style>
+:root{--ink:#17213a;--muted:#68738a;--line:#e3e8f1;--paper:#f6f8fc;--white:#fff;--purple:#6556d9;--blue:#3478d4}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);padding:18px max(22px,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;z-index:5}
+.brand{font-size:20px;font-weight:850;letter-spacing:-.7px}.brand span{color:var(--purple)}.topnote{color:var(--muted);font-size:13px}
+main{max-width:1120px;margin:0 auto;padding:42px 22px 70px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--purple);text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,48px);letter-spacing:-1.8px;margin:9px 0 10px;line-height:1.08}
+.sub{color:var(--muted);font-size:16px;line-height:1.6;max-width:650px;margin:0 0 30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.subject,.activity{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px;text-align:left;cursor:pointer;transition:.18s ease;color:inherit;min-height:150px;box-shadow:0 3px 12px #1d2b4a08}
+.subject:hover,.activity:hover{transform:translateY(-3px);border-color:#b9b1f2;box-shadow:0 12px 26px #1d2b4a12}
+.subject:focus-visible,.activity:focus-visible,.back:focus-visible{outline:3px solid #bcb5ff;outline-offset:3px}
+.icon{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;font-size:23px;margin-bottom:16px}
+.subject strong,.activity strong{display:block;font-size:18px;letter-spacing:-.3px}.subject small,.activity small{display:block;color:var(--muted);font-size:13px;line-height:1.45;margin-top:6px}
+.math{background:#eeedff}.science{background:#e7f8f1}.english{background:#fff2e4}.history{background:#fcebf0}.spanish{background:#e7f1ff}.french{background:#f1eaff}.latin{background:#fff5d9}
+.back{border:0;background:transparent;color:var(--purple);font-weight:750;padding:0;cursor:pointer;font-size:14px;margin-bottom:24px}
+.section-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}.section-head .icon{margin:0}
+.activity{min-height:135px}.activity .icon{margin-bottom:12px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:20px;max-width:760px}
+.panel h2{margin:0 0 8px;font-size:24px;letter-spacing:-.6px}.panel p{color:var(--muted);line-height:1.6}
+.action{display:inline-block;background:var(--purple);color:#fff;border:0;border-radius:10px;padding:11px 16px;font-weight:750;cursor:pointer;margin-top:8px}
+.note{width:100%;min-height:150px;border:1px solid var(--line);border-radius:10px;padding:13px;font:inherit;resize:vertical}
+.question{font-size:20px;font-weight:750;margin:18px 0}.answers{display:grid;gap:9px}.answers button{background:#f7f8fc;border:1px solid var(--line);padding:12px;border-radius:9px;text-align:left;cursor:pointer;font:inherit}.answers button:hover{border-color:var(--purple)}
+.feedback{font-weight:700;margin-top:12px;min-height:24px}.muted{color:var(--muted)}
+ .header-right{display:flex;align-items:center;gap:12px}.points-pill{background:#fff5d9;border:1px solid #f1df9f;border-radius:999px;padding:8px 12px;font-size:13px;white-space:nowrap}.shop-link{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;font-weight:750;cursor:pointer;color:var(--ink)}.shop-promo{display:flex;justify-content:space-between;align-items:center;gap:15px;background:#f0efff;border:1px solid #dcd8ff;border-radius:14px;padding:18px 20px;margin-top:22px}.shop-promo b,.shop-promo small{display:block}.shop-promo small{color:var(--muted);margin-top:4px}.shop-balance{display:inline-block;background:#fff5d9;border:1px solid #f1df9f;border-radius:10px;padding:12px 16px;margin:0 0 18px}.shop-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:19px}.shop-item .reward-icon{font-size:30px;margin-bottom:10px}.shop-item h3{margin:0 0 5px}.shop-item p{color:var(--muted);font-size:13px;min-height:38px}.shop-item button{background:var(--purple);color:white;border:0;border-radius:9px;padding:10px 13px;font-weight:750;cursor:pointer}.shop-item button:disabled{background:#e8eaf1;color:#7a8498;cursor:default}
+
+.character-card{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(120deg,#f0efff,#eef6ff);border:1px solid #dedbff;border-radius:16px;padding:20px;margin:0 0 24px}
+.avatar{width:112px;height:132px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:1px solid #e5e8f2;border-radius:18px;flex-shrink:0}
+.avatar-face{font-size:43px;line-height:1.2}.avatar-outfit{font-size:38px;line-height:1.2;margin-top:2px}
+.avatar-name{font-size:12px;font-weight:800;color:var(--muted);margin-top:5px}
+.wardrobe-item{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px}
+.wardrobe-item .reward-icon{font-size:29px}.wardrobe-item h3{font-size:16px;margin:7px 0 4px}.wardrobe-item p{font-size:12px;color:var(--muted);margin:0 0 10px}
+.wardrobe-item button{background:var(--purple);color:white;border:0;border-radius:9px;padding:9px 12px;font-weight:750;cursor:pointer}.wardrobe-item button:disabled{background:#e8eaf1;color:#7a8498;cursor:default}
+\n@media(max-width:600px){header{padding:15px 18px}.header-right{gap:6px}.points-pill{padding:7px 9px}.topnote{display:none}main{padding:30px 18px 55px}.shop-promo{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="brand">✦ Get <span>Studied</span></div><div class="header-right"><div class="points-pill">⭐ <b id="pointsTotal">0</b> points</div><button class="shop-link" id="openCharacter">🙂 Character</button><button class="shop-link" id="openShop">🛍️ Shop</button><div class="topnote">Grade 6 · Intermediate</div></div></header>
+<main id="app">
+  <section id="home">
+    <div class="eyebrow">Your learning space</div>
+    <h1>What are we learning today?</h1>
+    <p class="sub">Choose a subject to open its classroom. Then pick what you want to do: learn a lesson, practice with flashcards, take a quiz, write notes, or play a learning game.</p>
+    <div class="character-card">
+      <div><div class="eyebrow">Your study avatar</div><h2 style="margin:5px 0 7px">Make it your style!</h2><p class="muted" style="margin:0 0 12px">Unlock outfits and accessories with points you earn while studying.</p><button class="action" id="homeCharacter">Customize character →</button></div>
+      <div class="avatar" aria-label="Your character"><div class="avatar-face">🙂</div><div class="avatar-outfit" id="homeOutfit">👕</div><div class="avatar-name">YOUR AVATAR</div></div>
+    </div>
+    <div class="grid" id="subjects"></div>
+    <div class="shop-promo"><div><b>Get Studied Shop</b><small>Spend your points on fun rewards and classroom themes.</small></div><button class="action" id="homeShop">Visit shop →</button></div>
+  </section>
+  <section id="subjectPage" hidden>
+    <button class="back" id="backHome">← All subjects</button>
+    <div class="section-head"><div class="icon" id="subjectIcon"></div><div><div class="eyebrow">Your classroom</div><h1 id="subjectTitle" style="margin:3px 0 0"></h1></div></div>
+    <p class="sub" id="subjectDescription"></p>
+    <h2 style="font-size:18px;margin:0 0 14px">What would you like to do?</h2>
+    <div class="grid" id="activities"></div>
+  </section>
+  <section id="characterPage" hidden>
+    <button class="back" id="backCharacter">← Back</button>
+    <div class="eyebrow">Avatar studio</div><h1>Your character</h1>
+    <p class="sub">Choose an outfit you own. Buy new clothes and accessories in the Shop using your study points.</p>
+    <div class="character-card" style="max-width:500px">
+      <div><div class="eyebrow">Current look</div><h2 id="equippedName" style="margin:5px 0 7px">Classic Tee</h2><p class="muted">Your character's style is saved on this device.</p></div>
+      <div class="avatar"><div class="avatar-face">🙂</div><div class="avatar-outfit" id="characterOutfit">👕</div><div class="avatar-name">YOUR AVATAR</div></div>
+    </div>
+    <h2 style="font-size:19px;margin:24px 0 13px">Your wardrobe</h2>
+    <div class="grid" id="wardrobeItems"></div>
+    <button class="action" id="characterShop">Visit clothing shop →</button>
+  </section>
+  <section id="shopPage" hidden>
+    <button class="back" id="backShop">← Back</button>
+    <div class="eyebrow">Rewards corner</div><h1>Get Studied Shop</h1>
+    <p class="sub">Earn points by learning, then trade them for fun rewards. Your points and purchases are saved on this device.</p>
+    <div class="shop-balance">⭐ <b id="shopPoints">0</b> points available</div>
+    <div class="grid" id="shopItems"></div>
+    <h2 style="font-size:20px;margin:28px 0 13px">👕 Clothing & accessories</h2>
+    <p class="muted" style="margin:-4px 0 14px">Give your character a whole new look!</p>
+    <div class="grid" id="clothingItems"></div>
+    <p class="muted" style="margin-top:18px;font-size:13px">These are pretend classroom rewards—no real money or purchases.</p>
+  </section>
+  <section id="activityPage" hidden>
+    <button class="back" id="backSubject">← Back to classroom</button>
+    <div class="eyebrow" id="activitySubject"></div><h1 id="activityTitle"></h1>
+    <p class="sub" id="activityDescription"></p>
+    <div id="activityContent"></div>
+  </section>
+</main>
+<script>
+const subjects=[
+{name:"Math",icon:"➗",cls:"math",desc:"Numbers, patterns, shapes, and problem-solving.",topics:["Fractions and decimals","Ratios and rates","Expressions and equations","Geometry and measurement"]},
+{name:"Science",icon:"🔬",cls:"science",desc:"Explore living things, matter, energy, Earth, and space.",topics:["Ecosystems","Matter and mixtures","Forces and motion","Earth and space"]},
+{name:"English",icon:"📚",cls:"english",desc:"Build reading, writing, vocabulary, and grammar skills.",topics:["Main idea and details","Figurative language","Paragraph writing","Grammar and punctuation"]},
+{name:"History",icon:"🏛️",cls:"history",desc:"Discover people, places, events, and how the past shapes today.",topics:["Ancient civilizations","Early American history","World geography","Historical thinking"]},
+{name:"Spanish",icon:"🌎",cls:"spanish",desc:"Practice useful words, phrases, and beginner conversations.",topics:["Greetings and introductions","Numbers and dates","School and family","Everyday phrases"]},
+{name:"French",icon:"🥐",cls:"french",desc:"Learn vocabulary, pronunciation, and simple French sentences.",topics:["Bonjour and introductions","Numbers and colors","Family and school","Useful expressions"]},
+{name:"Latin",icon:"🏺",cls:"latin",desc:"Explore Latin vocabulary, word roots, and simple grammar.",topics:["Common Latin roots","Nouns and cases","Verbs and endings","Roman culture"]}
+];
+const modes=[
+{key:"lesson",name:"Lessons",icon:"📖",desc:"Clear explanations with examples."},
+{key:"flashcards",name:"Flashcards",icon:"🗂️",desc:"Review important words and ideas."},
+{key:"quiz",name:"Quizzes",icon:"✍️",desc:"Check what you know."},
+{key:"notes",name:"Notes",icon:"📝",desc:"Write and keep your study notes."},
+{key:"game",name:"Games",icon:"🎮",desc:"Practice with a quick challenge."}
+];
+let current=null,mode=null,cardIndex=0,quizIndex=0;
+const $=id=>document.getElementById(id);
+const rewardItems=[
+{id:"badge",name:"Star Student Badge",icon:"🏅",cost:30,desc:"A shiny badge for your study profile."},
+{id:"theme",name:"Purple Classroom Theme",icon:"💜",cost:50,desc:"A special purple look for your classroom."},
+{id:"rocket",name:"Rocket Sticker",icon:"🚀",cost:20,desc:"A fun sticker for your rewards shelf."},
+{id:"crown",name:"Learning Crown",icon:"👑",cost:75,desc:"A crown to celebrate your hard work."},
+{id:"rainbow",name:"Rainbow Sticker",icon:"🌈",cost:25,desc:"Add a colorful reward to your collection."},
+{id:"trophy",name:"Golden Trophy",icon:"🏆",cost:100,desc:"A big reward for reaching a study goal."}
+];
+const clothingItems=[
+{id:"hoodie",name:"Cozy Hoodie",icon:"🧥",cost:35,desc:"A comfy hoodie for study sessions."},
+{id:"varsity",name:"Varsity Jacket",icon:"🎽",cost:45,desc:"A sporty look for your avatar."},
+{id:"cape",name:"Super Learner Cape",icon:"🦸",cost:60,desc:"A cape for your next big learning adventure."},
+{id:"cap",name:"Cool Cap",icon:"🧢",cost:25,desc:"Top off your character's look."},
+{id:"glasses",name:"Smart Specs",icon:"🤓",cost:30,desc:"A clever accessory for your avatar."},
+{id:"headphones",name:"Music Headphones",icon:"🎧",cost:40,desc:"A fun accessory for quiet study time."}
+];
+let equipped=localStorage.getItem("studyworld-equipped")||"tee";
+const defaultClothing={id:"tee",name:"Classic Tee",icon:"👕",cost:0,desc:"Your starter outfit."};
+function allClothes(){return [defaultClothing,...clothingItems]}
+function renderAvatar(){
+ const item=allClothes().find(x=>x.id===equipped)||defaultClothing;
+ $("homeOutfit").textContent=item.icon;
+ $("characterOutfit").textContent=item.icon;
+ $("equippedName").textContent=item.name;
+}
+function openCharacter(){renderWardrobe();renderAvatar();show("characterPage")}
+function renderWardrobe(){
+ const wardrobe=allClothes().filter(x=>x.id==="tee"||owned.includes(x.id));
+ $("wardrobeItems").innerHTML=wardrobe.map(item=>`<div class="wardrobe-item"><div class="reward-icon">${item.icon}</div><h3>${item.name}</h3><p>${item.desc}</p><button data-equip="${item.id}" ${equipped===item.id?"disabled":""}>${equipped===item.id?"Wearing ✓":"Wear this"}</button></div>`).join("");
+ document.querySelectorAll("[data-equip]").forEach(btn=>btn.onclick=()=>{equipped=btn.dataset.equip;localStorage.setItem("studyworld-equipped",equipped);renderWardrobe();renderAvatar()});
+}
+let points=Number(localStorage.getItem("studyworld-points")||0);
+let owned=JSON.parse(localStorage.getItem("studyworld-owned")||"[]");
+function updatePoints(){ $("pointsTotal").textContent=points; if($("shopPoints"))$("shopPoints").textContent=points; }
+function earnPoints(amount,reason){points+=amount;localStorage.setItem("studyworld-points",String(points));updatePoints();const msg=$("feedback");if(msg)msg.textContent=`${reason} +${amount} points ⭐`;}
+function show(id){["home","subjectPage","activityPage","shopPage","characterPage"].forEach(x=>$(x).hidden=x!==id);window.scrollTo(0,0)}
+function openShop(){renderShop();show("shopPage")}
+function renderShop(){
+ updatePoints();
+ const draw=(items,target)=>{$(target).innerHTML=items.map(item=>{const has=owned.includes(item.id);return `<div class="shop-item"><div class="reward-icon">${item.icon}</div><h3>${item.name}</h3><p>${item.desc}</p><button data-buy="${item.id}" ${has||points<item.cost?"disabled":""}>${has?"Owned ✓":`Get it · ${item.cost} ⭐`}</button></div>`}).join("");};
+ draw(rewardItems,"shopItems");draw(clothingItems,"clothingItems");
+ document.querySelectorAll("[data-buy]").forEach(btn=>btn.onclick=()=>buyItem(btn.dataset.buy));
+}
+function buyItem(id){
+ const item=[...rewardItems,...clothingItems].find(x=>x.id===id);
+ if(!item||owned.includes(id)||points<item.cost)return;
+ points-=item.cost;owned.push(id);
+ localStorage.setItem("studyworld-points",String(points));localStorage.setItem("studyworld-owned",JSON.stringify(owned));
+ renderShop();if($("characterPage")&&!$("characterPage").hidden)renderWardrobe();
+}
+function renderSubjects(){$("subjects").innerHTML=subjects.map((s,i)=>`<button class="subject" data-sub="${i}"><span class="icon ${s.cls}">${s.icon}</span><strong>${s.name}</strong><small>${s.desc}</small></button>`).join("");document.querySelectorAll("[data-sub]").forEach(b=>b.onclick=()=>openSubject(subjects[+b.dataset.sub]))}
+function openSubject(s){current=s;$("subjectIcon").className="icon "+s.cls;$("subjectIcon").textContent=s.icon;$("subjectTitle").textContent=s.name;$("subjectDescription").textContent=s.desc;$("activities").innerHTML=modes.map(m=>`<button class="activity" data-mode="${m.key}"><span class="icon ${s.cls}">${m.icon}</span><strong>${m.name}</strong><small>${m.desc}</small></button>`).join("");document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>openActivity(b.dataset.mode));show("subjectPage")}
+function openActivity(key){mode=key;cardIndex=0;quizIndex=0;const m=modes.find(x=>x.key===key);$("activitySubject").textContent=current.name+" classroom";$("activityTitle").textContent=m.name;$("activityDescription").textContent=m.desc;renderActivity();show("activityPage")}
+function topicList(){return current.topics}
+function renderActivity(){const box=$("activityContent"),topics=topicList();if(mode==="lesson"){box.innerHTML=`<div class="panel"><div class="eyebrow">Mini lesson</div><h2>${topics[0]}</h2><p>${lessonText(current.name,topics[0])}</p><h3>Try this</h3><p>Explain the main idea in your own words, then think of one example from everyday life.</p><button class="action" id="nextLesson">Next topic →</button></div>`;$("nextLesson").onclick=()=>{earnPoints(5,"Lesson completed!");current.topics.push(current.topics.shift());renderActivity()}}
+else if(mode==="flashcards"){const terms=flashcards(current.name);let t=terms[cardIndex%terms.length];box.innerHTML=`<div class="panel"><div class="eyebrow">Flashcard ${cardIndex+1} of ${terms.length}</div><h2 style="font-size:27px">${t[0]}</h2><p id="definition" hidden>${t[1]}</p><button class="action" id="flip">Show answer</button> <button class="action" id="nextCard" style="background:#e9eaff;color:#3e35a0">Next card →</button></div>`;$("flip").onclick=()=>{let d=$("definition");d.hidden=!d.hidden;$("flip").textContent=d.hidden?"Show answer":"Hide answer"};$("nextCard").onclick=()=>{earnPoints(2,"Flashcard reviewed!");cardIndex++;renderActivity()}}
+else if(mode==="quiz"||mode==="game"){const qs=quizQuestions(current.name);let q=qs[quizIndex%qs.length];box.innerHTML=`<div class="panel"><div class="eyebrow">${mode==="game"?"Quick challenge":"Practice quiz"} · Question ${quizIndex+1}</div><div class="question">${q.q}</div><div class="answers">${q.a.map((a,i)=>`<button data-answer="${i}">${a}</button>`).join("")}</div><div class="feedback" id="feedback"></div><button class="action" id="nextQ">Next question →</button></div>`;let answered=false;document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>{if(answered)return;answered=true;const correct=+b.dataset.answer===q.correct;$("feedback").textContent=correct?"Correct! Great work. +10 points ⭐":"Good try — review the lesson and give it another go.";$("feedback").style.color=correct?"#16845b":"#a45a19";if(correct)earnPoints(10,"Correct answer!");document.querySelectorAll("[data-answer]").forEach(x=>x.disabled=true)});$("nextQ").onclick=()=>{quizIndex++;renderActivity()}}
+else{const k="studyworld-notes-"+current.name;box.innerHTML=`<div class="panel"><h2>Your ${current.name} notes</h2><p>Write down important ideas, questions, or things you want to remember. Your notes save in this browser.</p><textarea class="note" id="notes" placeholder="Start writing your notes..."></textarea><div class="muted" id="saved" style="margin-top:10px">Saved on this device</div></div>`;let n=$("notes");n.value=localStorage.getItem(k)||"";n.oninput=()=>{localStorage.setItem(k,n.value);$("saved").textContent="Saved ✓"};}}
+function lessonText(subject,topic){const map={Math:"A fraction represents part of a whole. A decimal is another way to write a number using tenths, hundredths, and more. For example, 0.5 is equal to one-half.",Science:"Scientists observe patterns, ask questions, and use evidence to explain how the natural world works. Start by describing what you notice, then use evidence to support an explanation.",English:"A strong reader looks for the central idea and the details that support it. A strong writer organizes ideas clearly and chooses details that help the reader understand.",History:"History is the study of people and events from the past. Historians use sources, compare points of view, and look for evidence before drawing conclusions.",Spanish:"Spanish nouns have grammatical gender, and everyday phrases are useful building blocks. Practice saying each phrase aloud and use it in a short sentence.",French:"French vocabulary becomes easier when you connect new words to familiar objects and repeat them in short sentences.",Latin:"Latin word roots appear in many English words. Learning a root can help you figure out the meaning of unfamiliar vocabulary."};return map[subject]+" This lesson connects to "+topic.toLowerCase()+"."}
+function flashcards(s){const common={Math:[["Numerator","The top number in a fraction."],["Denominator","The bottom number in a fraction."],["Equivalent fractions","Fractions that name the same amount."]],Science:[["Ecosystem","Living and nonliving things interacting in an area."],["Habitat","The place where an organism lives."],["Evidence","Information used to support an explanation."]],English:[["Main idea","The most important point or message."],["Metaphor","A comparison that says one thing is another."],["Inference","A conclusion based on clues and what you know."]],History:[["Primary source","An item or account from the time being studied."],["Civilization","A complex society with cities and institutions."],["Chronology","The order in which events happened."]],Spanish:[["Hola","Hello."],["Gracias","Thank you."],["Por favor","Please."]],French:[["Bonjour","Hello / good day."],["Merci","Thank you."],["S'il vous plaît","Please."]],Latin:[["Aqua","Water."],["Terra","Earth or land."],["Bene","Well or good."]]};return common[s]}
+function quizQuestions(s){const q={Math:[{q:"Which fraction is equal to 0.5?",a:["1/2","1/4","3/4"],correct:0},{q:"What is 3 × 4?",a:["7","12","16"],correct:1}],Science:[{q:"What do we call the place an organism lives?",a:["Habitat","Weather","Mineral"],correct:0},{q:"Which is living?",a:["Rock","Tree","Water"],correct:1}],English:[{q:"What is the main idea?",a:["A tiny detail","The central point","The title only"],correct:1},{q:"A metaphor is a kind of…",a:["Comparison","Question","Punctuation"],correct:0}],History:[{q:"A primary source comes from…",a:["The time being studied","A future prediction","A fictional story"],correct:0},{q:"Chronology means…",a:["Order of events","A type of map","A government"],correct:0}],Spanish:[{q:"What does 'gracias' mean?",a:["Please","Thank you","Goodbye"],correct:1},{q:"What does 'hola' mean?",a:["Hello","Sorry","Yes"],correct:0}],French:[{q:"What does 'merci' mean?",a:["Hello","Thank you","Please"],correct:1},{q:"'Bonjour' is used to say…",a:["Good day / hello","Good night","Goodbye"],correct:0}],Latin:[{q:"What does 'aqua' mean?",a:["Fire","Water","Earth"],correct:1},{q:"What does 'terra' mean?",a:["Earth / land","Sky","Book"],correct:0}]};return q[s]}
+$("backHome").onclick=()=>show("home");$("openCharacter").onclick=openCharacter;$("homeCharacter").onclick=openCharacter;$("backCharacter").onclick=()=>show("home");$("characterShop").onclick=openShop;$("backSubject").onclick=()=>show("subjectPage");$("openShop").onclick=openShop;$("homeShop").onclick=openShop;$("backShop").onclick=()=>show("home");updatePoints();renderSubjects();renderAvatar();
+</script>
+</body></html>
